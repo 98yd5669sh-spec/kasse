@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>RP Bar Kasse</title>
+
+<style>
+body{margin:0;font-family:Arial;background:#111;color:white;}
+.screen{display:none;height:100vh;}
+.active{display:block;}
+
+.tables{
+display:grid;
+grid-template-columns:repeat(2,1fr);
+gap:15px;
+padding:20px;
+}
+
+.table{
+background:#1f1f1f;
+border-radius:14px;
+padding:25px;
+font-size:22px;
+text-align:center;
+}
+
+.container{display:flex;height:100vh;}
+.categories{width:25%;background:#1a1a1a;padding:10px;overflow-y:auto;}
+.products{width:45%;display:flex;flex-wrap:wrap;gap:10px;padding:10px;overflow-y:auto;}
+.cart{width:30%;background:#0c0c0c;padding:10px;display:flex;flex-direction:column;}
+
+button{
+padding:16px;
+border:none;
+border-radius:12px;
+background:#2b2b2b;
+color:white;
+font-size:16px;
+}
+
+.product{width:45%;background:#222;}
+.cart-item{display:flex;justify-content:space-between;margin:6px 0;}
+.total{margin-top:auto;font-size:24px;}
+</style>
+</head>
+
+<body>
+
+<!-- SCHICHTSCREEN -->
+<div id="shiftScreen" class="screen active" style="text-align:center;padding-top:120px;">
+<h1>🍹 RP Bar Kasse</h1>
+<h2>Keine aktive Schicht</h2>
+<button style="font-size:22px;padding:20px;margin-top:20px;" onclick="startShift()">▶ Schicht beginnen</button>
+<div style="margin-top:30px;">
+<button onclick="showShiftHistory()">📜 Alte Schichten</button>
+</div>
+</div>
+
+<!-- TISCHE -->
+<div id="tableScreen" class="screen">
+<h1 style="text-align:center;">Tische</h1>
+<div class="tables" id="tables"></div>
+</div>
+
+<!-- POS -->
+<div id="posScreen" class="screen">
+<div class="container">
+
+<div class="categories" id="categories"></div>
+<div class="products" id="products"></div>
+
+<div class="cart">
+<button onclick="backToTables()">⬅ Zurück</button>
+<h2 id="tableName">Tisch</h2>
+<button style="background:#7a1d1d;margin-bottom:10px;" onclick="endShift()">🧾 Schicht beenden</button>
+<div id="cartItems"></div>
+<div class="total" id="total">0 $</div>
+<button onclick="saveOrder()">Bestellung parken</button>
+<button onclick="checkout()">Bezahlen</button>
+</div>
+
+</div>
+</div>
+
+<script src="app.js"></script>
+</body>
+</html>
